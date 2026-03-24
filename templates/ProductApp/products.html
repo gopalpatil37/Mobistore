@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Categories | MobiStore{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/categories.css' %}">
+
+<div class="container my-5">
+
+    <h2 class="fw-bold mb-4">Browse by Category</h2>
+
+    <!-- Category Cards -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-3">
+            <a href="#apple" class="text-decoration-none">
+                <div class="card h-100 shadow-sm text-center p-4">
+                    <img src="{% static 'images/iphone13pro.png' %}" class="img-fluid mb-3" height="120">
+                    <h6 class="fw-bold">Apple</h6>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="#samsung" class="text-decoration-none">
+                <div class="card h-100 shadow-sm text-center p-4">
+                    <img src="{% static 'images/samsung.png' %}" class="img-fluid mb-3" height="120">
+                    <h6 class="fw-bold">Samsung</h6>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="#oneplus" class="text-decoration-none">
+                <div class="card h-100 shadow-sm text-center p-4">
+                    <img src="{% static 'images/oneplus9pro.png' %}" class="img-fluid mb-3" height="120">
+                    <h6 class="fw-bold">OnePlus</h6>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-3">
+            <a href="#budget" class="text-decoration-none">
+                <div class="card h-100 shadow-sm text-center p-4">
+                    <img src="{% static 'images/redminote12.png' %}" class="img-fluid mb-3" height="120">
+                    <h6 class="fw-bold">Budget Phones</h6>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Apple -->
+    <h3 id="apple" class="fw-bold mb-3">Apple</h3>
+    <div class="row g-4 mb-5">
+        {% for data in all_data %}
+            {% if data.brand == "Apple" or data.brand == "apple" %}
+            <div class="col-md-3">
+                <div class="card shadow-sm h-100 mobile-card">
+                    <a href="{% url 'product_detail' data.id %}">
+                        <img src="{{ data.image.url }}" class="card-img-top mobile-img">
+                    </a>
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-1">{{ data.brand }} {{ data.name }}</h6>
+                        <p class="small text-muted mb-1">{{ data.ram }} RAM | {{ data.storage }}</p>
+                        <p class="fw-bold mb-1">₹{{ data.price }}</p>
+                        <form method="POST" action="{% url 'add_to_cart' data.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm fw-bold btn-warning w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Samsung -->
+    <h3 id="samsung" class="fw-bold mb-3">Samsung</h3>
+    <div class="row g-4 mb-5">
+        {% for data in all_data %}
+            {% if data.brand == "Samsung" or data.brand == 'samsung' %}
+            <div class="col-md-3">
+                <div class="card shadow-sm h-100 mobile-card">
+                    <a href="{% url 'product_detail' data.id %}">
+                        <img src="{{ data.image.url }}" class="card-img-top mobile-img">
+                    </a>
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-1">{{ data.brand }} {{ data.name }}</h6>
+                        <p class="small text-muted mb-1">{{ data.ram }} RAM | {{ data.storage }}</p>
+                        <p class="fw-bold mb-1">₹{{ data.price }}</p>
+                        <form method="POST" action="{% url 'add_to_cart' data.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm fw-bold btn-warning w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- OnePlus -->
+    <h3 id="oneplus" class="fw-bold mb-3">OnePlus</h3>
+    <div class="row g-4 mb-5">
+        {% for data in all_data %}
+            {% if data.brand == "OnePlus" or data.brand == 'oneplus' %}
+            <div class="col-md-3">
+                <div class="card shadow-sm h-100 mobile-card">
+                    <a href="{% url 'product_detail' data.id %}">
+                        <img src="{{ data.image.url }}" class="card-img-top mobile-img mb-0">
+                    </a>
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-1">{{ data.brand }} {{ data.name }}</h6>
+                        <p class="small text-muted mb-1">{{ data.ram }} RAM | {{ data.storage }}</p>
+                        <p class="fw-bold mb-1">₹{{ data.price }}</p>
+                        <form method="POST" action="{% url 'add_to_cart' data.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm fw-bold btn-warning w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Budget Phones -->
+    <h3 id="budget" class="fw-bold mb-3">Budget Phones</h3>
+    <div class="row g-4 mb-5">
+        {% for data in all_data %}
+            {% if data.brand != "Apple" and data.brand != 'apple' and data.brand != "Samsung" and data.brand != 'samsung' and data.brand != "OnePlus" and data.brand != 'oneplus' %}
+            <div class="col-md-3">
+                <div class="card shadow-sm h-100 mobile-card">
+                    <a href="{% url 'product_detail' data.id %}">
+                        <img src="{{ data.image.url }}" class="card-img-top mobile-img">
+                    </a>
+                    <div class="card-body text-center">
+                        <h6 class="fw-bold mb-1">{{ data.brand }} {{ data.name }}</h6>
+                        <p class="small text-muted mb-1">{{ data.ram }} RAM | {{ data.storage }}</p>
+                        <p class="fw-bold mb-1">₹{{ data.price }}</p>
+                        <form method="POST" action="{% url 'add_to_cart' data.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-sm fw-bold btn-warning w-100">
+                                Add to Cart
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+</div>
+
+<script src="{% static 'js/categories.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,137 @@
+<!--
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Mobiles | MobiStore{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+   Page Header
+    <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 gap-3">
+        <div>
+            <h2 class="fw-bold">Mobile Phones</h2>
+            <p class="text-muted mb-0">Explore our latest collection of smartphones.</p>
+        </div>
+
+        <div class="d-flex gap-2">
+            <input type="text" id="searchInput" class="form-control" placeholder="Search phone...">
+            <select class="form-select w-auto" id="priceFilter">
+                <option value="all">All Prices</option>
+                <option value="low">Below ₹30,000</option>
+                <option value="mid">₹30,000 - ₹70,000</option>
+                <option value="high">Above ₹70,000</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="row g-4" id="mobileGrid">
+
+        <div class="col-md-3 mobile-item" data-price="high">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/iphone13pro.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">iPhone 13 Pro</h6>
+                    <p class="small text-muted mb-1">A15 Bionic • 6.1″ OLED • Triple Camera</p>
+                    <p class="text-muted mb-2">₹1,09,900</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="mid">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/oneplus9pro.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">OnePlus 9 Pro</h6>
+                    <p class="small text-muted mb-1">Snapdragon 888 • 120Hz AMOLED</p>
+                    <p class="text-muted mb-2">₹64,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="mid">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/samsung.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Samsung Galaxy S21</h6>
+                    <p class="small text-muted mb-1">Exynos 2100 • 64MP Camera</p>
+                    <p class="text-muted mb-2">₹55,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="low">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/redminote12.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Redmi Note 12</h6>
+                    <p class="small text-muted mb-1">AMOLED • 5000mAh Battery</p>
+                    <p class="text-muted mb-2">₹19,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="high">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/iphone14.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">iPhone 14</h6>
+                    <p class="small text-muted mb-1">A15 Bionic • 12MP Dual Camera</p>
+                    <p class="text-muted mb-2">₹79,900</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="mid">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/samsungA54.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Samsung Galaxy A54</h6>
+                    <p class="small text-muted mb-1">120Hz Display • 50MP Camera</p>
+                    <p class="text-muted mb-2">₹38,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="mid">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/realme11pro.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Realme 11 Pro</h6>
+                    <p class="small text-muted mb-1">200MP Camera • Curved AMOLED</p>
+                    <p class="text-muted mb-2">₹27,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 mobile-item" data-price="low">
+            <div class="card h-100 shadow-sm mobile-card">
+                <img src="{% static 'images/motog54.png' %}" class="card-img-top mobile-img" alt="">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Moto G54</h6>
+                    <p class="small text-muted mb-1">5G • 6000mAh Battery</p>
+                    <p class="text-muted mb-2">₹15,999</p>
+                    <button class="btn btn-warning w-100 fw-bold">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="text-center mt-4">
+        <a href="{% url 'categories' %}" class="btn btn-outline-primary fw-bold">
+            View All
+        </a>
+    </div>
+
+</div>
+{% endblock %}
+-->

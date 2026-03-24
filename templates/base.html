@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MobiStore{% endblock %}</title>
+    
+    <!--icon-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-light">
+
+
+<!-- Navbar-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm nav-glass sticky-top">
+    <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-3 brand-adv" href="{% url 'home' %}">
+            <span class="logo-box">
+                <span class="phone-shape"></span>
+                <span class="signal"></span>
+            </span>
+            <span class="logo-word">
+                <span class="mobi">Mobi</span><span class="store">Store</span>
+            </span>
+        </a>
+
+        <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#nav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="nav">
+            <ul class="navbar-nav ms-auto align-items-lg-center nav-links">
+                <li class="nav-item"><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'all_products' %}">Products</a></li>
+                
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'contact' %}">Contact</a></li>
+                
+                {% if user.is_authenticated %}
+                <li>  <a class="nav-link" href="{% url 'my_orders' %}" >
+                    My Orders
+                </a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">Hello {{user.username}}</a></li>
+                <li class="nav-item ms-lg-2">
+                    <a href="{% url 'logout' %}" class="btn btn-warning btn-sm px-3 fw-bold">Logout</a>
+                </li>
+                {% else %}
+                
+                <li class="nav-item ms-lg-2">
+                    <a href="{% url 'login' %}" class="btn btn-warning btn-sm px-3 fw-bold">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'register' %}" class="btn btn-warning btn-sm px-3 ms-lg-2 fw-bold">Register</a>
+                </li>
+                {% endif %}
+                <li class="nav-item me-lg-2">
+                    <a href="{% url 'cart_view' %}"
+                    class="nav-link position-relative">
+
+                        <i class="bi bi-cart3 fs-5"></i>
+
+                        {% if cart_count %}
+                        <span class="position-absolute top-0 start-100 translate-middle
+                                    badge rounded-pill bg-danger">
+                            {{ cart_count }}
+                        </span>
+                        {% endif %}
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!--end navbar -->
+{% block hero %}{% endblock %}
+{% block discount %} {% endblock %}
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer class="bg-dark pt-5 pb-3 text-white">
+    <div class="container">
+        <div class="row g-4">
+            <!-- Brand -->
+            <div class="col-md-4">
+                <a class="navbar-brand d-flex align-items-center gap-3 brand-adv text-white" href="#">
+                    <span class="logo-box">
+                        <span class="phone-shape"></span>
+                        <span class="signal"></span>
+                    </span>
+                    <span class="logo-word">
+                        <span class="mobi">Mobi</span><span class="store">Store</span>
+                    </span>
+                </a>
+                <p class="small pt-3 text-light">
+                    Your one-stop destination for the latest smartphones,
+                    best deals, and fast delivery across India.
+                </p>
+
+                <!-- Social Icons -->
+                <div class="d-flex gap-3 mt-3 fs-5">
+                    <a href="#" class="text-white text-decoration-none"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white text-decoration-none"><i class="bi bi-instagram"></i></a>
+                    <a href="#" class="text-white text-decoration-none"><i class="bi bi-twitter-x"></i></a>
+                    <a href="#" class="text-white text-decoration-none"><i class="bi bi-youtube"></i></a>
+                    <a href="#" class="text-white text-decoration-none"><i class="bi bi-linkedin"></i></a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-4">
+                <h4 class="fw-semibold">Quick Links</h4>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'home' %}" class="footer-link text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'all_products' %}" class="footer-link text-decoration-none">Shop</a></li>
+                    <li><a href="{% url 'offer' %}" class="footer-link text-decoration-none">Offers</a></li>
+                    <li><a href="{% url 'contact' %}" class="footer-link text-decoration-none">Contact</a></li>
+
+                </ul>
+            </div>
+
+            <!-- Newsletter + Contact -->
+            <div class="col-md-4">
+                <h4 class="fw-semibold">Stay Connected</h4>
+                <p class="small text-light">Subscribe for latest offers & updates.</p>
+
+                <form class="d-flex mb-3">
+                    <input type="email" class="form-control form-control-sm me-2" placeholder="Your email">
+                    <button class="btn btn-warning btn-sm fw-bold">Join</button>
+                </form>
+
+                <p class="mb-1 small">📞 +91 90000 00000</p>
+                <p class="mb-1 small">✉ support@mobistore.com</p>
+                <p class="small">📍 Maharashtra, India</p>
+            </div>
+        </div>
+
+        <hr class="border-secondary my-4">
+
+        <!-- Bottom Bar -->
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center small text-light">
+            <div  class="mx-auto" style="width: 350px;">
+                © 2026 MobiStore • Smartphone Selling Web App
+            </div>
+            <!--
+            <div class="mt-2 mt-md-0">
+                <a href="#" class="text-decoration-none text-light me-3">Privacy Policy</a>
+                <a href="#" class="text-decoration-none text-light me-3">Terms</a>
+                <a href="#" class="text-decoration-none text-light">Refunds</a>
+            </div>
+            -->
+        </div>
+    </div>
+</footer>
+
+<!-- Back to Top -->
+<button id="backToTop" class="btn btn-warning position-fixed"
+        style="bottom: 20px; right: 20px; display: none;">
+    ↑ Top
+</button>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JS -->
+<script src="{% static 'js/logic.js' %}"></script>
+
+</body>
+</html>

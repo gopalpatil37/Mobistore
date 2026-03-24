@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Offers | MobiStore{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/offers.css' %}">
+
+<div class="container my-5">
+
+    <div class="text-center mb-5">
+        <h2 class="fw-bold">Hot Deals & Offers</h2>
+        <p class="text-muted">Grab the best smartphone deals before they’re gone!</p>
+    </div>
+
+    <div class="row g-4">
+
+        <!-- Offer Card -->
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm offer-card">
+                <span class="badge bg-danger offer-badge">30% OFF</span>
+                <img src="{% static 'images/iphone14.png' %}" class="card-img-top offer-img">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">iPhone 14</h6>
+                    <p class="small text-muted mb-1">A15 Chip • Dual Camera</p>
+                    <p class="mb-2">
+                        <del class="text-muted">₹89,900</del>
+                        <span class="fw-bold text-success"> ₹79,900</span>
+                    </p>
+                    <button class="btn btn-warning btn-sm w-100 fw-bold offer-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm offer-card">
+                <span class="badge bg-danger offer-badge">₹5,000 OFF</span>
+                <img src="{% static 'images/samsungA54.png' %}" class="card-img-top offer-img">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Samsung Galaxy A54</h6>
+                    <p class="small text-muted mb-1">120Hz • 50MP Camera</p>
+                    <p class="mb-2">
+                        <del class="text-muted">₹43,999</del>
+                        <span class="fw-bold text-success"> ₹38,999</span>
+                    </p>
+                    <button class="btn btn-warning btn-sm w-100 fw-bold offer-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm offer-card">
+                <span class="badge bg-danger offer-badge">20% OFF</span>
+                <img src="{% static 'images/oneplus9pro.png' %}" class="card-img-top offer-img">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">OnePlus 9 Pro</h6>
+                    <p class="small text-muted mb-1">120Hz AMOLED</p>
+                    <p class="mb-2">
+                        <del class="text-muted">₹79,999</del>
+                        <span class="fw-bold text-success"> ₹64,999</span>
+                    </p>
+                    <button class="btn btn-warning btn-sm w-100 fw-bold offer-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card h-100 shadow-sm offer-card">
+                <span class="badge bg-danger offer-badge">Best Deal</span>
+                <img src="{% static 'images/redminote12.png' %}" class="card-img-top offer-img">
+                <div class="card-body text-center">
+                    <h6 class="fw-bold">Redmi Note 12</h6>
+                    <p class="small text-muted mb-1">AMOLED • 5000mAh</p>
+                    <p class="mb-2">
+                        <del class="text-muted">₹22,999</del>
+                        <span class="fw-bold text-success"> ₹19,999</span>
+                    </p>
+                    <button class="btn btn-warning btn-sm w-100 fw-bold offer-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{% static 'js/offers.js' %}"></script>
+{% endblock %}

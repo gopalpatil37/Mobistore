@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}My Profile | MobiStore{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row g-4">
+
+        <!-- LEFT: USER CARD -->
+        <div class="col-md-4">
+            <div class="card shadow-sm h-100 text-center">
+                <div class="card-body p-4">
+
+                    <img src="{% static 'images/user.png' %}"
+                         class="rounded-circle mb-3"
+                         width="120" height="120" alt="User">
+
+                    <h5 class="fw-bold mb-1">
+                        {{ request.user.get_full_name|default:request.user.username }}
+                    </h5>
+
+                    <p class="text-muted small mb-3">
+                        {{ request.user.email }}
+                    </p>
+
+                    <div class="d-grid gap-2">
+                        <a href="{% url 'cart_view' %}" class="btn btn-outline-primary">
+                            🛒 My Cart
+                        </a>
+
+                        <a href="{% url 'checkout' %}" class="btn btn-outline-success">
+                            ✅ Checkout
+                        </a>
+
+                        <a href="{% url 'logout' %}" class="btn btn-outline-danger">
+                            Logout
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- RIGHT: ACCOUNT DETAILS -->
+        <div class="col-md-8">
+            <div class="card shadow-sm h-100">
+                <div class="card-body p-4">
+
+                    <h4 class="fw-bold mb-4">Account Details</h4>
+
+                    <div class="row g-3">
+
+                        <div class="col-md-6">
+                            <label class="form-label">Username</label>
+                            <input type="text"
+                                   class="form-control"
+                                   value="{{ request.user.username }}"
+                                   disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Email</label>
+                            <input type="email"
+                                   class="form-control"
+                                   value="{{ request.user.email }}"
+                                   disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">First Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   value="{{ request.user.first_name }}"
+                                   disabled>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name</label>
+                            <input type="text"
+                                   class="form-control"
+                                   value="{{ request.user.last_name }}"
+                                   disabled>
+                        </div>
+
+                    </div>
+
+                    <!-- FUTURE ACTIONS -->
+                    <div class="mt-4 d-flex gap-3">
+                        <a href="#" class="btn btn-warning fw-bold px-4 disabled">
+                            ✏ Edit Profile (Coming Soon)
+                        </a>
+
+                        <a href="#" class="btn btn-outline-secondary disabled">
+                            🔐 Change Password
+                        </a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

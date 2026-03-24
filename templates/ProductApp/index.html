@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block hero %}
+<div class="hero" id="hero"
+     style="background-image: url('{% static 'images/hero.png' %}');">
+    <div class="hero-overlay" id="heroContent"></div>
+</div>
+{% endblock %}
+
+{% block discount %}
+<section class="py-5 bg-dark">
+    <div class="container">
+        <div class="row g-4">
+
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 overflow-hidden promo-card">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-5 p-3">
+                            <img src="{% static 'images/offer1.png' %}" class="img-fluid">
+                        </div>
+                        <div class="col-7 p-3">
+                            <h3 class="fw-bold">Big Smartphone Sale</h3>
+                            <p class="text-muted mb-2">
+                                Get up to <strong>30% OFF</strong><br>
+                                on selected models.
+                            </p>
+                            <a href="{% url 'all_products' %}" class="btn btn-warning fw-bold px-4">
+                                Shop Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm h-100 overflow-hidden promo-card">
+                    <div class="row g-0 align-items-center">
+                        <div class="col-5 p-3">
+                            <img src="{% static 'images/offer2.png' %}" class="img-fluid">
+                        </div>
+                        <div class="col-7 p-3">
+                            <h3 class="fw-bold">Student Special</h3>
+                            <p class="text-muted mb-2">
+                                Extra <strong>₹2,000 OFF</strong><br>
+                                with student ID.
+                            </p>
+                            <a href="{% url 'all_products' %}"  class="btn btn-warning fw-bold px-4">
+                                Explore Deals
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold">Mobile Phones</h2>
+            <p class="text-muted mb-0">Explore our latest collection of smartphones.</p>
+        </div>
+
+        <select class="form-select w-auto" id="priceFilter">
+            <option value="all">All Prices</option>
+            <option value="low">Below ₹30,000</option>
+            <option value="mid">₹30,000 - ₹70,000</option>
+            <option value="high">Above ₹70,000</option>
+        </select>
+    </div>
+
+    <div class="row g-4" id="mobileGrid">
+        {% for p in products %}
+        <div class="col-md-3 mobile-item"
+             data-price="{% if p.price < 30000 %}low{% elif p.price <= 70000 %}mid{% else %}high{% endif %}">
+
+            <div class="card h-100 shadow-sm mobile-card">
+                <a href="{% url 'product_detail' p.id %}">
+                    <img src="{{ p.image.url }}" class="card-img-top mobile-img mb-0">
+                </a>
+
+                <div class="card-body text-center py-2">
+                    <h6 class="fw-bold mb-1">{{ p.brand }} {{ p.name }}</h6>
+                    <p class="small text-muted mb-1">{{ p.ram }} RAM | {{ p.storage }}</p>
+                    <p class="fw-bold mb-2">₹{{ p.price }}</p>
+
+                    <form action="{% url 'add_to_cart' p.id %}" method="post" class="m-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm fw-bold btn-warning w-100 py-1">
+                            Add to Cart
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        {% empty %}
+            <p class="text-center text-muted">No products available.</p>
+        {% endfor %}
+    </div>
+
+    <div class="text-center mt-4">
+        <a href="{% url 'all_products' %}" class="btn btn-outline-primary fw-bold">
+            View All
+        </a>
+    </div>
+
+</div>
+{% endblock %}

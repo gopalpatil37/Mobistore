@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5 d-flex justify-content-center" style="padding:20px;">
+    <div class="card shadow-lg p-5 text-center" style="max-width: 600px; width: 100%; padding-bottom: 10px;">
+
+        <h2 class="text-success mb-3">🎉 Order Placed Successfully!</h2>
+
+        <p class="fs-5">
+            Thank you for shopping with <strong>MobiStore</strong>.
+        </p>
+
+        <p class="mb-2">
+            Your Order ID is:
+            <span class="fw-bold text-primary">#{{ order_id }}</span>
+        </p>
+
+        <p class="text-muted small">
+            We’ll notify you once your order is shipped.
+        </p>
+
+        <div class="d-flex justify-content-center gap-3 mt-4">
+            <a href="{% url 'home' %}" class="btn btn-outline-primary px-4">
+                Continue Shopping
+            </a>
+
+            <a href="{% url 'my_orders' %}" class="btn btn-success px-4">
+                View My Orders
+            </a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

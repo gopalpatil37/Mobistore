@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}About Us | MobiStore{% endblock %}
+{% load static %}
+
+{% block content %}
+<main class="container my-5">
+<div class="row align-items-center mb-5">
+    <div class="col-md-6">
+        <h2 class="fw-bold mb-3">About MobiStore</h2>
+        <p>
+            MobiStore is a modern smartphone selling platform built to provide
+            users with the latest mobile devices at the best prices.
+        </p>
+        <p>
+            Our goal is to make buying smartphones simple, fast, and secure.
+            From budget phones to premium flagship devices, MobiStore offers
+            a wide range of options for every customer.
+        </p>
+        <p>
+            This project is developed using <strong>Django</strong> and
+            <strong>Bootstrap</strong> as a part of an academic and learning
+            experience.
+        </p>
+    </div>
+
+    <div class="col-md-6 text-center">
+        <img src="{% static 'images/hero.png' %}"
+             class="img-fluid rounded shadow"
+             alt="About MobiStore">
+    </div>
+</div>
+
+<!-- Why Choose Us -->
+<div class="row text-center g-4">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold">Trusted</h5>
+                <p class="text-muted">
+                    We provide genuine products from trusted brands and sellers.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold">Fast Delivery</h5>
+                <p class="text-muted">
+                    Quick and safe delivery to your doorstep across India.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body">
+                <h5 class="fw-bold">Secure Payments</h5>
+                <p class="text-muted">
+                    Multiple secure payment options for a worry-free purchase.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+{% endblock %}

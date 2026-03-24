@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container mt-5" style="padding-bottom: 200px;" >
+    <h2>Your Cart</h2>
+
+    {% if cart %}
+    <table class="table table-bordered">
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Total</th>
+            <th>Remove</th>
+
+        </tr>
+
+        {% for key, item in cart.items %}
+        <tr>
+            <td><img src="{{ item.image }}" width="60" alt="image"></td>
+            <td>{{ item.name }}</td>
+            <td>₹{{ item.price }}</td>
+            <td>
+                <div class="d-flex justify-content-center align-items-center gap-2">
+                    <a href="{% url 'decrease_quantity' key %}" class="btn btn-sm btn-outline-danger">−</a>
+                    <span class="fw-bold">{{ item.quantity }}</span>
+                    <a href="{% url 'increase_quantity' key %}" class="btn btn-sm btn-outline-success">+</a>
+                </div>
+            </td>
+            <td>₹{{ item.item_total|floatformat:2 }}</td>
+            <td>
+                <a href="{% url 'remove_from_cart' key %}" class="btn btn-sm btn-danger">
+                    ❌
+                </a>
+            </td>
+        </tr>
+
+        {% endfor %}
+    </table>
+  
+
+    <h4 class="text-end">Grand Total: ₹{{ total }}</h4>
+    <div class="text-end mt-3">
+        {% if user.is_authenticated %}
+        <a href="{% url 'checkout' %}" class="btn btn-success">
+            Proceed to Checkout
+        </a>
+        {% else %}
+         <a href="{% url 'login' %}" class="btn btn-success">
+            You need to login first
+        </a>
+        {% endif %}
+    </div>
+
+    {% else %}
+        <p>Your cart is empty.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

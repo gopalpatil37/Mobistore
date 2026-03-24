@@ -1,0 +1,67 @@
+{% extends 'staffapp/staff.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="fw-bold mb-4">📦 All Orders</h2>
+
+    <div class="table-responsive">
+        <table class="table table-dark table-striped align-middle text-center">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>User</th>
+                    <th>Customer</th>
+                    <th>Phone</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                    <th>Update</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>{{ order.user.username }}</td>
+                    <td>{{ order.name }}</td>
+                    <td>{{ order.phone }}</td>
+                    <td>₹{{ order.total_amount }}</td>
+
+                    <td>
+                        <span class="badge 
+                            {% if order.status == 'Pending' %}bg-warning
+                            {% elif order.status == 'Shipped' %}bg-info
+                            {% elif order.status == 'Delivered' %}bg-success
+                            {% else %}bg-danger{% endif %}">
+                            {{ order.status }}
+                        </span>
+                    </td>
+
+                    <td>
+                        <form method="POST" action="{% url 'update_order_status' order.id %}">
+                            {% csrf_token %}
+                            <select name="status" class="form-select form-select-sm mb-2">
+                                {% for key, value in order.STATUS_CHOICES %}
+                                <option value="{{ key }}" {% if order.status == key %}selected{% endif %}>
+                                    {{ value }}
+                                </option>
+                                {% endfor %}
+                            </select>
+
+                            <button class="btn btn-sm btn-warning w-100">
+                                Update
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7">No orders found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}
