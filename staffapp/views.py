@@ -18,16 +18,23 @@ def staff_view(request):
 
 
 #add product
+import os
+
 def add_product_view(request):
     if request.method == 'POST':
+        print("CLOUD_NAME:", os.getenv("CLOUD_NAME"))
+        print("FILES:", request.FILES)
+
         form = ProductForm(request.POST, request.FILES)
 
-        if form.is_valid():   # ✅ IMPORTANT
-            form.save()
-            messages.success(request, 'Product added successfully', extra_tags='success')
-            return redirect('products')
+        if form.is_valid():
+            try:
+                product = form.save()
+                print("IMAGE URL:", product.image.url)
+            except Exception as e:
+                print("UPLOAD ERROR:", str(e))
         else:
-            print(form.errors)  # optional debug
+            print("FORM ERRORS:", form.errors)
 
     else:
         form = ProductForm()
