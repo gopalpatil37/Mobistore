@@ -47,6 +47,19 @@ INSTALLED_APPS = [
     'AuthApp',
     'staffapp',
 ]
+#for storing media in cloudinary
+import os
+import cloudinary
+
+cloudinary.config(
+    cloud_name = os.getenv("CLOUD_NAME"),
+    api_key = os.getenv("API_KEY"),
+    api_secret = os.getenv("API_SECRET")
+)
+
+INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
