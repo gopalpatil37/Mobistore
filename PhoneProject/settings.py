@@ -49,11 +49,16 @@ INSTALLED_APPS = [
 import cloudinary
 import os
 
-cloudinary.config(
-    cloud_name = os.getenv("CLOUD_NAME"),
-    api_key = os.getenv("API_KEY"),
-    api_secret = os.getenv("API_SECRET"),
-)
+if os.getenv("CLOUDINARY_URL"):
+    # Render
+    cloudinary.config()
+else:
+    # Local
+    cloudinary.config(
+        cloud_name=os.getenv("CLOUD_NAME"),
+        api_key=os.getenv("API_KEY"),
+        api_secret=os.getenv("API_SECRET"),
+    )
 #DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 
