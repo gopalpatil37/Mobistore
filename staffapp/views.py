@@ -22,8 +22,8 @@ import os
 
 def add_product_view(request):
     if request.method == 'POST':
-        print("CLOUD_NAME:", os.getenv("CLOUD_NAME"))
-        print("FILES:", request.FILES)
+        print("API_KEY:", os.getenv("API_KEY"))
+        print("API_SECRET:", os.getenv("API_SECRET"))
 
         form = ProductForm(request.POST, request.FILES)
 
