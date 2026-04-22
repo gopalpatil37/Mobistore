@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/6.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
-
 from pathlib import Path
 import os
 import dj_database_url
@@ -19,7 +18,6 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from dotenv import load_dotenv
 
 load_dotenv()
-
 
 
 # Quick-start development settings - unsuitable for production
@@ -58,11 +56,8 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('API_SECRET'),
 }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+#DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
-print("CLOUD_NAME:", os.getenv("CLOUD_NAME"))
-print("API_KEY:", os.getenv("API_KEY"))
-print("API_SECRET:", os.getenv("API_SECRET"))
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -162,3 +157,13 @@ EMAIL_USE_TLS = True
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
