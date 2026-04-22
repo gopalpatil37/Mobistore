@@ -19,14 +19,20 @@ def staff_view(request):
 
 #add product
 def add_product_view(request):
-    form = ProductForm()
     if request.method == 'POST':
-        form = ProductForm(request.POST,request.FILES)
-        form.is_valid()
-        form.save()
-        messages.success(request,'Product added successfuly',extra_tags='success')
-        return redirect('products')
-    return render(request, 'StaffApp/add_product.html',{'form': form})
+        form = ProductForm(request.POST, request.FILES)
+
+        if form.is_valid():   # ✅ IMPORTANT
+            form.save()
+            messages.success(request, 'Product added successfully', extra_tags='success')
+            return redirect('products')
+        else:
+            print(form.errors)  # optional debug
+
+    else:
+        form = ProductForm()
+
+    return render(request, 'StaffApp/add_product.html', {'form': form})
 
 #product show in staff
 def products_view(request):
