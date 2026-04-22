@@ -32,7 +32,7 @@ def add_product_view(request):
     else:
         form = ProductForm()
 
-    return render(request, 'StaffApp/add_product.html', {'form': form})
+    return render(request, 'staffapp/add_product.html', {'form': form})
 
 #product show in staff
 def products_view(request):
