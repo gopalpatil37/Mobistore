@@ -60,6 +60,10 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
+print("CLOUD_NAME:", os.getenv("CLOUD_NAME"))
+print("API_KEY:", os.getenv("API_KEY"))
+print("API_SECRET:", os.getenv("API_SECRET"))
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
