@@ -1,9 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 
 # Create your models here.
 class Product(models.Model):
-    image = models.ImageField(upload_to='products/')
+    image = CloudinaryField('image')
     name = models.CharField(max_length=100)
     brand = models.CharField(max_length=100)
     price = models.DecimalField(decimal_places=2, max_digits=10)
