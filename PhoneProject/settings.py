@@ -46,18 +46,17 @@ INSTALLED_APPS = [
     'ProductApp',
     'AuthApp',
     'staffapp',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 #for storing media in cloudinary
 import os
-import cloudinary
 
-cloudinary.config(
-    cloud_name = os.getenv("CLOUD_NAME"),
-    api_key = os.getenv("API_KEY"),
-    api_secret = os.getenv("API_SECRET")
-)
-
-INSTALLED_APPS += ['cloudinary', 'cloudinary_storage']
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.getenv('CLOUD_NAME'),
+    'API_KEY': os.getenv('API_KEY'),
+    'API_SECRET': os.getenv('API_SECRET'),
+}
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
