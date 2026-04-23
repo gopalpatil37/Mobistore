@@ -1,0 +1,37 @@
+
+/* add to cart */
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+function saveCart() {
+    localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+document.querySelectorAll(".add-to-cart").forEach(btn => {
+    btn.addEventListener("click", function () {
+        let id = this.dataset.id;
+        let name = this.dataset.name;
+        let price = parseInt(this.dataset.price);
+        let image = this.dataset.image;
+
+        let item = cart.find(p => p.id == id);
+
+        if (item) {
+            item.qty += 1;
+        } else {
+            cart.push({
+                id: id,
+                name: name,
+                price: price,
+                image: image,
+                qty: 1
+            });
+        }
+
+        saveCart();
+        this.innerText = "Added ✔";
+        setTimeout(() => this.innerText = "Add to Cart", 800);
+    });
+});
+</script>
